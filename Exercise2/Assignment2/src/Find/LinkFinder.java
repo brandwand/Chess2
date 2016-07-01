@@ -16,32 +16,41 @@ public class LinkFinder {
 
 	public static void main(String[] args) {
 		try {
+			LinkFinder l = new LinkFinder();
 			InputStream in = new FileInputStream(new File("neumont.edu"));
-			processPage(in);
+			l.processPage(in);
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public static void processPage(InputStream in) {
+	public void processPage(InputStream in) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
+		StringBuilder out = new StringBuilder();
+		
 		try {
 			while ((line = reader.readLine()) != null) {
-				System.out.println(line);
+				if(getLinks() == true) {
+					StringBuilder results = out.append(line + "\n");
+					System.out.print(results);
+
+				}
 			} 
 			reader.close();
-
+			System.out.println();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public Iterator<String> getLinks() {
-		String pattern = "<a";
+	public boolean getLinks() {
+		String pattern = "<[Aa][\\s+][Hh][Rr][Ee][Ff][\\s]?=";
+		//String pattern = "<a";
 		Pattern p = Pattern.compile(pattern);
 		Matcher m = p.matcher(line);
 		boolean matches = m.find();
+		return matches;
 	}
 }
