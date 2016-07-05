@@ -10,6 +10,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.junit.Test;
 
@@ -20,21 +22,31 @@ public class LinkFinderTest {
 		LinkFinder find = new LinkFinder();
 		InputStream in;
 		try {
-			in = new FileInputStream(new File("neumont.edu"));	
+			in = new FileInputStream(new File("neumont.edu"));
 			find.processPage(in);
 			InputStream resultsIn = new FileInputStream(new File("results"));
 			BufferedReader reader = new BufferedReader(new InputStreamReader(resultsIn));
-			String line = reader.readLine();
-			assertTrue(line == find.getLine());
-			System.out.println(find.getLine());
+			ArrayList<String> l = new ArrayList<String>();
+			try {
+				String a;
+				while ((a = reader.readLine()) != null) {
+					l.add(a);
+				} 				
+				reader.close();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			Iterator<String> results = l.iterator();
+			Iterator<String> eduPage = find.getLinks();
+
+			while(results.hasNext()) {	
+				assertEquals(results.next(), eduPage.next());
+			}					
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		}	
 
-	}
-
+	} 
 }
