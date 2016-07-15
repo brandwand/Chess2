@@ -1,0 +1,69 @@
+package Find;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class Crawler 
+{
+	private URL url;
+	private int maxPages = 50;
+	Visit i;
+	ArrayList<String> toVisit = new ArrayList<String>();
+	ArrayList<URL> beenVisited = new ArrayList<URL>();
+
+
+	public Crawler(URL url, int maxPages, Visit i) {
+		this.url = url;
+		this.maxPages = maxPages;
+		this.i = i;		
+		toVisit.add(url.toString());
+
+	}
+	public void Crawl() {
+		while (toVisit.get(0) != null) {		
+			String removed = toVisit.remove(0);	
+			LinkFinder find = new LinkFinder();
+			try {
+				find.processPage(url.openStream());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			url = addProtocol(removed);	
+			Iterator<String> urlList = find.getLinks();
+			while(urlList.hasNext()) {
+				toVisit.add(urlList.next());
+			}
+
+			if(!toVisit.contains(url) && !beenVisited.contains(url)) {
+				beenVisited.add(url);
+				find.removeFromList();
+				i.visit(url);
+			}
+		}
+	}
+
+	public URL addProtocol(String string) {
+		String wholeString = string;
+		String pattern =  "https?";
+		Pattern p = Pattern.compile(pattern);
+		Matcher m = p.matcher(string);
+		boolean matches = m.find();	
+		URL wholeURL = null;
+		if(!matches) {
+			wholeString = url.getProtocol() + "://" + url.getHost() + string;
+			try {
+				wholeURL = new URL(wholeString);
+			} catch (MalformedURLException e) {
+				e.printStackTrace();
+			}
+		}
+		return wholeURL;
+
+	}
+}

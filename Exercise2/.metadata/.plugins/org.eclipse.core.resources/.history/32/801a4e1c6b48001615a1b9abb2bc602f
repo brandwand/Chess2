@@ -1,0 +1,10 @@
+package Find;
+
+public class crawlerMain {
+	public static void main(String[] args) {
+		VisitAction v;
+		Crawler crawl = new Crawler("http://shalladay-iis1.student.neumont.edu", 45, v.visit("http://shalladay-iis1.student.neumont.edu"));
+		
+}
+}
+    
