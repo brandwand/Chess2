@@ -23,7 +23,6 @@ public class Crawler {
 		toVisit.add(url.toString());
 
 	}
-	
 	public void Crawl() {	
 		LinkFinder find = new LinkFinder();
 		try {

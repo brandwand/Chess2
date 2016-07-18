@@ -1,0 +1,36 @@
+package Find;
+
+public class Indexor {
+	
+	public Indexor() {
+		
+	}
+	
+	public static void initialize(String arrayFileName, int arraySize, long initialValue) {
+		long[] array = new long[arraySize]; 
+	}
+	
+	public void PersistentArray(String arrayFileName) {
+		
+	}
+	
+	public void set(int index, long value) {
+		
+	}
+	
+	public long get(int index) {
+		return index;
+	}
+	
+	public long getLength() {
+		return (Long) null;
+	}
+	
+	public void close() {
+		
+	}
+	
+	public static void delete(String arrayFileName) {
+		
+	}
+}

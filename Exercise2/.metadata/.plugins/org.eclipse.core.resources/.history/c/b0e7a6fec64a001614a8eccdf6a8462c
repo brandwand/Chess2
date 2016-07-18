@@ -25,44 +25,36 @@ public class Crawler {
 	}
 	public void Crawl() {	
 		LinkFinder find = new LinkFinder();
+		try {
+			while (!toVisit.get(0).isEmpty()) {
+				String removed = toVisit.remove(0);	
+				URL visitingURL = addProtocol(removed);	
 
-		while (toVisit.get(0) != null) {		
-
-			String removed = toVisit.remove(0);	
-			URL visitingURL = addProtocol(removed);	
-
-			try {	
-				find.processPage(visitingURL.openStream());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}	
+				try {	
+					find.processPage(visitingURL.openStream());
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}	
 
 
-			Iterator<String> urlList = find.getLinks();
-			boolean exists = false;
-			while(urlList.hasNext()) {
-				String listOfURLs = urlList.next();
-				for(int i = 0; i < toVisit.size(); i++) {
-					if(toVisit.get(i).equals(listOfURLs)) {
-						exists = true;
-					}
-				}
-					for(int j = 0; j < beenVisited.size(); j++) {
-						if(toVisit.get(j).equals(listOfURLs)) {
-							exists = true;
-						}
-					}
-					if(!exists) {
+				Iterator<String> urlList = find.getLinks();
+				while(urlList.hasNext()) {	
+					String listOfURLs = urlList.next();
+					URL addedProtocol = addProtocol(listOfURLs);
+					if(!toVisit.contains(listOfURLs) && !beenVisited.contains(addedProtocol)) {
 						toVisit.add(listOfURLs);
-					}
+					}				
 				}	
 				beenVisited.add(visitingURL);
-				i.visit(visitingURL);
-			}		
-			find.removeFromList();
+				i.visit(visitingURL);	
+				find.removeFromList();
 
+			}
+		} catch (IndexOutOfBoundsException e) {
+			System.out.println("Reached end of list.");
 		}
+	}
 
 		public URL addProtocol(String string) {
 			String pattern =  "https?";
