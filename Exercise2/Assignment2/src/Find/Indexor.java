@@ -1,53 +1,79 @@
 package Find;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class Indexor {
-	static RandomAccessFile file;
+	private static RandomAccessFile raf;
+	private static File file;
+	private int indexMult = 8;
 	
-	public Indexor() {
-		
+	public Indexor(String arrayFileName) {
+		file = new File(arrayFileName);
 	}
 	
 	public static void initialize(String arrayFileName, int arraySize, long initialValue) {
 		try {
-			file = new RandomAccessFile(arrayFileName, "rw");
-			file.setLength(arraySize);
-			file.writeLong(initialValue);
+			raf = new RandomAccessFile(arrayFileName, "rw");
+			raf.setLength(arraySize);
+			raf.writeLong(initialValue);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	public void PersistentArray(String arrayFileName) {
-		
-	}
-	
 	public void set(int index, long value) {
-		
+		try {
+			raf.seek(index * indexMult);
+			raf.writeLong(value);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public long get(int index) {
-		return index;
+		long l = 0;
+		try {
+			raf.seek(index * indexMult);
+			l = raf.readLong();
+
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return l;
 	}
 	
 	public long getLength() {
-		return (Long) null;
+		long length = 0;
+		try {
+			length = raf.length();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return length;
 	}
 	
 	public void close() {
 		try {
-			file.close();
+			raf.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public static void delete(String arrayFileName) {
+
+	public static boolean delete(String arrayFileName) {
+		if(file.exists()) { 
+			file.delete();
+			return true;
+		
+		} else {
+			return false;
+		}
 		
 	}
 }
