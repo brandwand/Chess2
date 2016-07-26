@@ -1,0 +1,31 @@
+package Find;
+
+import java.io.File;
+
+public class ListFile {
+	File file;
+	public ListFile(String listFileName) {
+		file = new File(listFileName);
+	}
+	
+    public static void initialize(String listFileName) {
+    	
+    }
+    public static void delete(String listFileName) {
+    	
+    }
+    
+    public void close() {
+    	
+    }
+    public long newEntry(Entry entry) {
+    	
+    }
+    public Entry getEntry(long offset) {
+    	
+    }
+    public void putEntry(long offset, Entry entry) {
+    	
+    }
+
+}

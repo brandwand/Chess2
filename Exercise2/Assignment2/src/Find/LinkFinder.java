@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 public class LinkFinder {
 	private String line;
 	ArrayList<String> list = new ArrayList<String>();
-	
+
 	public void processPage(InputStream in) {
 		BufferedReader reader = new BufferedReader(new InputStreamReader(in));
 		try {
@@ -45,7 +45,7 @@ public class LinkFinder {
 		Iterator<String> i = list.iterator();
 		return i;
 	}
-	
+
 	public void removeFromList() {
 		list.clear();
 	}
