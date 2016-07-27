@@ -1,0 +1,21 @@
+package Lab1;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
+public class MainClass {
+
+	public static void main(String[] args) {
+		InputStream in = null;
+		try {
+			in = new FileInputStream("t.txt");
+			ReadTextFile read = new ReadTextFile(in);
+			read.getMoves();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+}

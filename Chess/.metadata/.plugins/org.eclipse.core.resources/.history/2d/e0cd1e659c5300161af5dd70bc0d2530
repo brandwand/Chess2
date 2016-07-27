@@ -1,0 +1,42 @@
+package Lab1;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class ReadTextFile {
+
+	BufferedReader read;
+	public ReadTextFile(InputStream fileName) {
+		try {
+			read = new BufferedReader(new InputStreamReader(fileName));
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void getMoves() {
+		String pattern = "[a-f][0-9]-[a-f][0-9]";
+		Pattern p = Pattern.compile(pattern);
+		Matcher m;
+		try {
+			while(read != null) {
+
+				String line = read.readLine();
+				m = p.matcher(line);		
+				boolean matches = m.find();	
+				if(matches) {
+					System.out.println(line);
+				}
+			}
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+}
