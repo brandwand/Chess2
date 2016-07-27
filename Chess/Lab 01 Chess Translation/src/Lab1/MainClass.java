@@ -16,9 +16,8 @@ public class MainClass {
 		}
 		ReadTextFile read = new ReadTextFile(in);
 		try {
-
-			read.putPosition();
 			read.getMoves();
+			//read.putPosition();
 		} catch (NullPointerException e){
 			e.printStackTrace();
 		}
