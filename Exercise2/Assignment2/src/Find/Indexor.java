@@ -25,7 +25,7 @@ public class Indexor {
 		}
 	}
 
-	public void set(int index, long value) {
+	public void set(long index, long value) {
 		try {
 			raf.seek(index * indexMult);
 			raf.writeLong(value);
