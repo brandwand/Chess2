@@ -11,10 +11,8 @@ public class Game {
 			} else {
 				in = new FileInputStream(args[0]);
 				FileIO file = new FileIO(in);
-				file.checkEverything();
-
+				file.comparingLines();
 			}		
-
 		} catch(Exception e) {
 
 		}	

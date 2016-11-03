@@ -19,44 +19,65 @@ public class FileIO {
 			e.printStackTrace();
 		}
 	}
-	
-	public void checkEverything() {
+
+	public void comparingLines() {
 		try {
 			while((line = read.readLine()) != null) {
 				placement();
 				movement();
+				castlingQueenSide();
+				castlingKingSide();
 			}
+			System.out.println("Number of placements " + placeCounter);
+			System.out.println("Number of moves " + moveCounter);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
+	
+	public void castlingKingSide() {
+		String placementPattern = "[e][18] [g][18] [h][18] [f][18]";
+		Pattern pattern = Pattern.compile(placementPattern);
+		Matcher match = pattern.matcher(line);
+		boolean matched = match.find();
+		if(matched) {
+			System.out.println("castling King Side");
+		}
+	}
+	
+	public void castlingQueenSide() {
+		String placementPattern = "[e][18] [f][18] [h][18] [g][18]";
+		Pattern pattern = Pattern.compile(placementPattern);
+		Matcher match = pattern.matcher(line);
+		boolean matched = match.find();
+		if(matched) {
+		}
+	}
+	
 	public void placement() {
 
 		String placementPattern = "[KQRPKB][ld][a-h][1-8]";
 		Pattern pattern = Pattern.compile(placementPattern);
 		Matcher match = pattern.matcher(line);
 		boolean matched = match.find();
-			if(matched) {
-				System.out.println(line);
-				placeCounter++;
-			} else {
-				System.out.println("Not a match");
-			}
-			System.out.println("Number of placements " + placeCounter);
+		if(matched) {
+			System.out.println(line);
+			placeCounter++;
+		} else {
+			System.out.println("Not a match");
+		}
 	}
 
 	public void movement() {
-		String placementPattern = "[a-h][1-8]\\s[a-h][1-8]";
+		String placementPattern = "[a-h][1-8] [a-h][1-8]";
 		Pattern pattern = Pattern.compile(placementPattern);
 		Matcher match = pattern.matcher(line);
 		boolean matched = match.find();
-			if(matched) {
-				System.out.println(line);
-				moveCounter++;
-			} else {
-				System.out.println("Not a match");
-			}
-			System.out.println("Number of moves " + moveCounter);
+		if(matched) {
+			System.out.println(line);
+			moveCounter++;
+		} else {
+			System.out.println("Not a match");
+		}
 	}
 }
