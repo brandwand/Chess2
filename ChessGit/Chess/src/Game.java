@@ -14,7 +14,6 @@ public class Game {
 				file.comparingLines();
 			}		
 		} catch(Exception e) {
-
 		}	
 	}
 }
