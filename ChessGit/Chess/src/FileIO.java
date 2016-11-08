@@ -21,7 +21,7 @@ public class FileIO {
 		moveCounter = 0;
 		kingSideCounter = 0;
 		queenSideCounter = 0;
-		placementLength = 4;
+		placementLength = 6;
 		castleLength = 7;
 		try {
 			read = new BufferedReader(new InputStreamReader(fileName));
@@ -33,11 +33,10 @@ public class FileIO {
 	public void comparingLines() {
 		try {
 			while((line = read.readLine()) != null) {
-				if(line.length() == placementLength) {
+				if(line.length() == 9 || line.length() == 4) {
 					placement();
-				} else if(line.length() > placementLength && line.length() < castleLength){
-					movement();
 				} else {
+					movement();
 					castlingQueenSide();
 					castlingKingSide();
 				}
@@ -103,40 +102,57 @@ public class FileIO {
 		return colorLong;
 	}
 
-	public void placement() {
-		String placementPattern = "([KQRPKB])([ld])([a-h][1-8])";
+	public void placement() {		
+		String placementPattern = "([KQRPKB])([ld])([a-h][1-8]) ?([KQRPKB]?)([ld]?)([a-h]?[1-8]?)";
 		Pattern pattern = Pattern.compile(placementPattern);
 		Matcher match = pattern.matcher(line);
 		boolean matched = match.find();
-
 		if(matched) {
 			String pieceName = match.group(1);
 			String color = match.group(2);
 			String position = match.group(3);
-			System.out.println(line + " " + matchColor(color) + " " + matchPiece(pieceName) + " placed at " + position);
+			int onePattern = 5;
+			if(line.length() > onePattern) {
+				String secondPieceName = match.group(4);
+				String secondColor = match.group(5);
+				String secondPosition = match.group(6);
+				String firstValidPosition = line.substring(0,4);
+				String secondValidPosition = line.substring(5,9);
+				System.out.println(firstValidPosition + " " + matchColor(color) + " " + matchPiece(pieceName) + " placed at " + position);
+				System.out.println(secondValidPosition + " " + matchColor(secondColor) + " " + matchPiece(secondPieceName) + " placed at " + secondPosition);
+			} else {
+				System.out.println(line + " " + matchColor(color) + " " + matchPiece(pieceName) + " placed at " + position);
+			}
 			placeCounter++;
 		} else {
-			System.out.println("Not a match");
+			System.out.println(line + " Not a match");
 		}
 	}
 
 	public void movement() {
-		String placementPattern = "([a-h][1-8]) ([a-h][1-8])[\\*]?";
+		String placementPattern = "([a-h][1-8]) ([a-h][1-8])([\\*]?) ?([a-h]?[1-8]?) ?([a-h]?[1-8]?)([\\*]?)";
 		Pattern pattern = Pattern.compile(placementPattern);
 		Matcher match = pattern.matcher(line);
 		boolean matched = match.find();
-		int comparedLineLength = 5;
 		if(matched) {
 			String position = match.group(1);
 			String locationMovingTo = match.group(2);
-			if(line.length() > comparedLineLength) {
+			String secondPosition = match.group(4);
+			String secondLocationMovingTo = match.group(5);
+			String captured = match.group(6);
+			int secondMove = 6;
+			if(line.length() == secondMove) {
 				System.out.println(line + " Moved from " + position + " to " + locationMovingTo + " and captured a piece.");
-			} else {
+			} else if(line.length() < secondMove) {
 				System.out.println(line + " Moved from " + position + " to " + locationMovingTo);
+			} else if(!captured.isEmpty()){
+				System.out.println(line.substring(6, 12) + " Moved from " + secondPosition + " to " + secondLocationMovingTo + " and captured a piece.");
+			} else {
+				System.out.println(line.substring(6, 11) + " Moved from " + secondPosition + " to " + secondLocationMovingTo);
 			}
 			moveCounter++;
 		} else {
-			System.out.println("Not a match");
+			System.out.println(line + " Not a match");
 		}
 	}
 }
