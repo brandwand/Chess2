@@ -31,14 +31,23 @@ public class FileIO {
 	}
 
 	public void comparingLines() {
+		String kingSide;
+		String kingSide2;
+		String queenSide;
+		String queenSide2;
 		try {
 			while((line = read.readLine()) != null) {
+				kingSide = "e1 g1 h1 f1";
+				kingSide2 = "e8 g8 h8 f8";
+				queenSide = "e1 c1 a1 d1";
+				queenSide2 = "e8 c8 a8 d8";
 				if(line.length() == 9 || line.length() == 4) {
 					placement();
-				} else {
-					movement();
+				} else if(line.equals(kingSide) || line.equals(kingSide2) || line.equals(queenSide) || line.equals(queenSide2)){
 					castlingQueenSide();
 					castlingKingSide();
+				} else {
+					movement();
 				}
 			}
 			System.out.println("Number of placements " + placeCounter);
@@ -57,7 +66,7 @@ public class FileIO {
 		boolean matched = match.find();
 		if(matched) {
 			kingSideCounter++;
-			System.out.println("castling King side");
+			System.out.println(line + " castling King side");
 		}
 	}
 
@@ -68,7 +77,7 @@ public class FileIO {
 		boolean matched = match.find();
 		if(matched) {
 			queenSideCounter++;
-			System.out.println("castling Queen side");
+			System.out.println(line + " castling Queen side");
 		}
 	}
 
@@ -106,7 +115,7 @@ public class FileIO {
 		String placementPattern = "([KQRPKB])([ld])([a-h][1-8]) ?([KQRPKB]?)([ld]?)([a-h]?[1-8]?)";
 		Pattern pattern = Pattern.compile(placementPattern);
 		Matcher match = pattern.matcher(line);
-		boolean matched = match.find();
+		boolean matched = match.matches();
 		if(matched) {
 			String pieceName = match.group(1);
 			String color = match.group(2);
@@ -130,10 +139,10 @@ public class FileIO {
 	}
 
 	public void movement() {
-		String placementPattern = "([a-h][1-8]) ([a-h][1-8])([\\*]?) ?([a-h]?[1-8]?) ?([a-h]?[1-8]?)([\\*]?)";
-		Pattern pattern = Pattern.compile(placementPattern);
+		String movePattern = "([a-h][1-8]) ([a-h][1-8])([\\*]?) ?([a-h]?[1-8]?) ?([a-h]?[1-8]?)([\\*]?)";
+		Pattern pattern = Pattern.compile(movePattern);
 		Matcher match = pattern.matcher(line);
-		boolean matched = match.find();
+		boolean matched = match.matches();
 		if(matched) {
 			String position = match.group(1);
 			String locationMovingTo = match.group(2);
@@ -148,6 +157,7 @@ public class FileIO {
 			} else if(!captured.isEmpty()){
 				System.out.println(line.substring(6, 12) + " Moved from " + secondPosition + " to " + secondLocationMovingTo + " and captured a piece.");
 			} else {
+				System.out.println(line.substring(0,5) + " Moved from " + position + " to " + locationMovingTo);
 				System.out.println(line.substring(6, 11) + " Moved from " + secondPosition + " to " + secondLocationMovingTo);
 			}
 			moveCounter++;
