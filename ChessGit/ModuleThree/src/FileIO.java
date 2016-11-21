@@ -202,7 +202,7 @@ public class FileIO {
 
 			} else {
 				moveArrayList.add(position + " " + locationMovingTo);
-				moveArrayList.add(secondPosition + " " + secondLocationMovingTo + " " + captured);
+				moveArrayList.add(secondPosition + " " + secondLocationMovingTo);
 				System.out.println(line.substring(0,5) + " Moved from " + position + " to " + locationMovingTo);
 				System.out.println(line.substring(6, 11) + " Moved from " + secondPosition + " to " + secondLocationMovingTo);
 			}
@@ -210,10 +210,7 @@ public class FileIO {
 		} else {
 			System.out.println(line + " Not a match");
 		}		
-		System.out.println(moveArrayList
-				);
-	
+		System.out.println(moveArrayList);
 		return moveArrayList;
-
 	}
 }

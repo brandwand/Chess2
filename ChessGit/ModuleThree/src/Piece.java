@@ -42,7 +42,7 @@ public abstract class Piece {
 		return space;
 	}
 	
-	public void setSpace() {
+	public void setSpace(String space) {
 		this.space = space;
 	}
 }

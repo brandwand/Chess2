@@ -18,6 +18,7 @@ public class Game {
 		} catch(Exception e) {
 		}	
 		file.comparingLines();
+		
 		board.placement(file.placeArrayList());
 		board.movement(file.moveArrayList());
 		String[][] boardArray = board.printBoard();

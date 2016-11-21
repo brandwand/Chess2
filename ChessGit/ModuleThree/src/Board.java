@@ -92,7 +92,7 @@ public class Board {
 
 	public String[][] printBoard() {
 		String[][] boardArray = new String[array.length][array.length];
-		String border = "---------------------------------";
+		//		String border = "---------------------------------";
 		for (int i = array.length - 1; i > 0; i--) {
 			for (int t = 0; t < array.length; t++) {
 				boardArray[i][t] = array[i][t];
@@ -103,11 +103,11 @@ public class Board {
 	}
 
 
-	public void updateBoard(String piece, String color, int rows, int cols) {
+	public void updateBoard(String piece, String color, int row, int col) {
 		if(piece != empty) {
-			array[rows][cols] = "|" + piece + color +  "|";
+			array[row][col] = "|" + piece + color +  "|";
 		} else {
-			array[rows][cols] = empty;
+			array[row][col] = empty;
 		}
 	}
 
@@ -264,7 +264,9 @@ public class Board {
 				}
 				break;
 			}
-			break;
+			//		case '-': 
+			//			setPiece = null;
+			//			break;
 		}
 	}
 
@@ -293,35 +295,31 @@ public class Board {
 
 	public void placement(ArrayList<String> place) {
 		String[] placeSplitUp = new String[array.length];
-		for (int i = place.size() - 1; i > 0; i--) {
-			for (int t = 0; t < place.size(); t++) {		
-				String placeToString = place.get(t).toString();
-				placeSplitUp = placeToString.split(" ");
-				findingBoardSpot(placeSplitUp[2]);
-				updateBoard(placeSplitUp[0], placeSplitUp[1], rows, cols);
-				grabPiece(checkSpace(rows, cols), placeSplitUp[2]);
-			}
+		for (int t = 0; t < place.size(); t++) {		
+			String placeToString = place.get(t).toString();
+			placeSplitUp = placeToString.split(" ");
+			findingBoardSpot(placeSplitUp[2]);
+			updateBoard(placeSplitUp[0], placeSplitUp[1], rows, cols);
+			grabPiece(checkSpace(rows, cols), placeSplitUp[2]);
 		}
-
 	}
 
 	public void movement(ArrayList<String> move) {
-
-		for (int i = move.size() - 1; i > 0; i--) {
-			for (int t = 0; t < move.size(); t++) {		
-				String placeToString = move.get(i).toString();
-				String[] moveSplitUp = placeToString.split(" ");
-				findingBoardSpot(moveSplitUp[0]);
-				int startrow = rows;
-				int startcol = cols;
-				findingBoardSpot(moveSplitUp[1]);
-				grabPiece(checkSpace(startrow, startcol), moveSplitUp[0]);
-				updateBoard(setPiece.getShortName(), setPiece.getShortColor(), rows, cols);
-				updateBoard(empty, "", startrow, startcol);
-			}
+		for (int t = 0; t < move.size(); t++) {		
+			String moveToString = move.get(t).toString();
+			String[] moveSplitUp = moveToString.split(" ");
+			findingBoardSpot(moveSplitUp[0]);
+			int startrow = rows;
+			int startcol = cols;
+			findingBoardSpot(moveSplitUp[1]);	
+			grabPiece(checkSpace(startrow, startcol), moveSplitUp[0]);	
+			if(setPiece != null) {
+				if(setPiece.chekMove(rows, cols)) {	
+					updateBoard(setPiece.getShortName(), setPiece.getShortColor(), rows, cols);
+					updateBoard(empty, "", startrow, startcol);	
+					setPiece = null;
+				}
+			}			
 		}
-		//		String moveToString = move.toString();
-		//		String[] moveSplitUp = moveToString.split(" ");
-
 	}
 }
