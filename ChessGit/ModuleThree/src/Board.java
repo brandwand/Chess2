@@ -304,7 +304,7 @@ public class Board {
 		}
 	}
 
-	public void movement(ArrayList<String> move) {
+	public ArrayList<String> movement(ArrayList<String> move) {
 		for (int t = 0; t < move.size(); t++) {		
 			String moveToString = move.get(t).toString();
 			String[] moveSplitUp = moveToString.split(" ");
@@ -320,6 +320,8 @@ public class Board {
 					setPiece = null;
 				}
 			}			
+			move.remove(t);
 		}
+		return move;
 	}
 }
