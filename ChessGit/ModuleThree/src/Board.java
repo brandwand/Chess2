@@ -41,6 +41,14 @@ public class Board {
 	private static int rows;
 	private static int cols;
 
+	public static int getRows() {
+		return rows;
+	}
+
+	public static int getCols() {
+		return cols;
+	}
+
 	public Board() {
 		array = new String[width][height];
 		constructBoard();

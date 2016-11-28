@@ -21,12 +21,23 @@ public class Game {
 		while (!didMove) {
 			System.out.println("White Turn");
 			input = scan.nextLine();
-			String pieceName = "|" + input.toUpperCase().trim() + "|";
-			Starter.file.setLine(input);
-			Starter.file.movement();
-			Board.movement(Starter.file.movement());
-			didMove = true;
-			turn = false;
+			String[] inputSplit = input.split(" ");
+			Board.findingBoardSpot(inputSplit[0]);
+			Board.grabPiece(Board.checkSpace(Board.getRows(), Board.getCols()), inputSplit[0]);
+//			if(Board.setPiece.chekMove(Board.getRows(), Board.getCols(), true)) {
+				if(Board.setPiece.shortColor.equals("L")) {
+
+					Starter.file.setLine(input);
+					Starter.file.movement();
+					Board.movement(Starter.file.moveArrayList());
+					didMove = true;
+					turn = false;
+					Starter.file.moveArrayList().clear();
+//				}
+			} else {
+				System.out.println("Try again");
+				//				Board.printingBoard();
+			}
 		}	
 	}
 
@@ -35,18 +46,22 @@ public class Game {
 		while (!didMove) {
 			System.out.println("Black Turn");
 			input = scan.nextLine();
-			//			if(Board.setPiece)
-			//			if(pieceName.contains("Q") || pieceName.contains("K") || pieceName.contains("N") || pieceName.contains("B") || pieceName.contains("R") || pieceName.contains("P")) {
-			//				if(pieceName.endsWith("D")) {
-			//					if(pieceName.length() == 2) {
-			Starter.file.setLine(input);
-			Starter.file.movement();
-			Board.movement(Starter.file.movement());
-			didMove = true;
-			turn = true;
-			//					}
-			//				}
-			//		}
+			String[] inputSplit = input.split(" ");
+			Board.findingBoardSpot(inputSplit[0]);
+			Board.grabPiece(Board.checkSpace(Board.getRows(), Board.getCols()), inputSplit[0]);
+//			if(Board.setPiece.chekMove(Board.getRows(), Board.getCols(), true)) {
+				if(Board.setPiece.shortColor.equals("D")) {
+					Starter.file.setLine(input);
+					Starter.file.movement();
+					Board.movement(Starter.file.moveArrayList());
+					didMove = true;
+					turn = true;
+					Starter.file.moveArrayList().clear();
+//				}
+			} else {
+				System.out.println("Try Again");
+				//				Board.printingBoard();
+			}
 		}
 	}
 }
