@@ -1,45 +1,45 @@
 import java.util.ArrayList;
 
 public class Board {
-	private King kingL;
-	private King kingD; 
-	private Queen queenL; 
-	private Queen queenD;
-	private Rook rookL1;
-	private Rook rookL2;
-	private Rook rookD1;
-	private Rook rookD2;
-	private Knight knightL1;
-	private Knight knightL2;
-	private Knight knightD1;
-	private Knight knightD2;
-	private Bishop bishopL1;
-	private Bishop bishopL2;
-	private Bishop bishopD1;
-	private Bishop bishopD2;
-	private Pawn pawnL1;
-	private Pawn pawnL2;
-	private Pawn pawnL3;
-	private Pawn pawnL4;
-	private Pawn pawnL5;
-	private Pawn pawnL6;
-	private Pawn pawnL7; 
-	private Pawn pawnL8; 
-	private Pawn pawnD1; 
-	private Pawn pawnD2; 
-	private Pawn pawnD3; 
-	private Pawn pawnD4; 
-	private Pawn pawnD5; 
-	private Pawn pawnD6; 
-	private Pawn pawnD7; 
-	private Pawn pawnD8; 
+	private static King kingL;
+	private static King kingD; 
+	private static Queen queenL; 
+	private static Queen queenD;
+	private static Rook rookL1;
+	private static Rook rookL2;
+	private static Rook rookD1;
+	private static Rook rookD2;
+	private static Knight knightL1;
+	private static Knight knightL2;
+	private static Knight knightD1;
+	private static Knight knightD2;
+	private static Bishop bishopL1;
+	private static Bishop bishopL2;
+	private static Bishop bishopD1;
+	private static Bishop bishopD2;
+	private static Pawn pawnL1;
+	private static Pawn pawnL2;
+	private static Pawn pawnL3;
+	private static Pawn pawnL4;
+	private static Pawn pawnL5;
+	private static Pawn pawnL6;
+	private static Pawn pawnL7; 
+	private static Pawn pawnL8; 
+	private static Pawn pawnD1; 
+	private static Pawn pawnD2; 
+	private static Pawn pawnD3; 
+	private static Pawn pawnD4; 
+	private static Pawn pawnD5; 
+	private static Pawn pawnD6; 
+	private static Pawn pawnD7; 
+	private static Pawn pawnD8; 
 	private int width = 9;
 	private int height = 9;
 	private static String[][] array;
 	public static String empty = "|--|";
-	protected Piece setPiece;
-	private int rows;
-	private int cols;
+	protected static Piece setPiece;
+	private static int rows;
+	private static int cols;
 
 	public Board() {
 		array = new String[width][height];
@@ -90,7 +90,7 @@ public class Board {
 		}
 	}
 
-	public String[][] printBoard() {
+	public static String[][] printBoard() {
 		String[][] boardArray = new String[array.length][array.length];
 		//		String border = "---------------------------------";
 		for (int i = array.length - 1; i > 0; i--) {
@@ -103,7 +103,7 @@ public class Board {
 	}
 
 
-	public void updateBoard(String piece, String color, int row, int col) {
+	public static void updateBoard(String piece, String color, int row, int col) {
 		if(piece != empty) {
 			array[row][col] = "|" + piece + color +  "|";
 		} else {
@@ -163,7 +163,7 @@ public class Board {
 
 	}
 
-	public void grabPiece(String piece, String spot) {
+	public static void grabPiece(String piece, String spot) {
 		switch(piece.charAt(2)) {
 		case 'L' :
 			switch(piece.charAt(1)) {
@@ -270,7 +270,7 @@ public class Board {
 		}
 	}
 
-	public void findingBoardSpot(String spot) {
+	public static void findingBoardSpot(String spot) {
 		String[] s = spot.trim().split("");
 		switch (s[0]) {
 		case "a": cols = 1;
@@ -293,7 +293,7 @@ public class Board {
 		rows = Integer.parseInt(s[1]);
 	}
 
-	public void placement(ArrayList<String> place) {
+	public static void placement(ArrayList<String> place) {
 		String[] placeSplitUp = new String[array.length];
 		for (int t = 0; t < place.size(); t++) {		
 			String placeToString = place.get(t).toString();
@@ -303,8 +303,19 @@ public class Board {
 			grabPiece(checkSpace(rows, cols), placeSplitUp[2]);
 		}
 	}
+	
+	public static void printingBoard() {
+		String[][] boardArray = printBoard();
+		for (int i = boardArray.length - 1; i > 0; i--) {
+			for (int t = 0; t < boardArray.length; t++) {
+				System.out.print(boardArray[i][t].toString());
+			}
+			System.out.println();
+		}
+		System.out.println("  A   B   C   D   E   F   G   H");
+}
 
-	public ArrayList<String> movement(ArrayList<String> move) {
+	public static void movement(ArrayList<String> move) {
 		for (int t = 0; t < move.size(); t++) {		
 			String moveToString = move.get(t).toString();
 			String[] moveSplitUp = moveToString.split(" ");
@@ -312,16 +323,15 @@ public class Board {
 			int startrow = rows;
 			int startcol = cols;
 			findingBoardSpot(moveSplitUp[1]);	
-			grabPiece(checkSpace(startrow, startcol), moveSplitUp[0]);	
+			grabPiece(checkSpace(startrow, startcol), moveSplitUp[0]);
 			if(setPiece != null) {
-				if(setPiece.chekMove(rows, cols)) {	
+				if(setPiece.chekMove(rows, cols, true)) {	
 					updateBoard(setPiece.getShortName(), setPiece.getShortColor(), rows, cols);
 					updateBoard(empty, "", startrow, startcol);	
 					setPiece = null;
-				}
+					printingBoard();
+				} 			
 			}			
-			move.remove(t);
 		}
-		return move;
 	}
 }

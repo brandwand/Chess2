@@ -7,7 +7,7 @@ public class Knight extends Piece {
 	}
 
 	@Override
-	public boolean chekMove(int row, int col) {
+	public boolean chekMove(int row, int col, boolean saveMove) {
 		int[] rowCol = Board.spaceConverter(getSpace());
 		String check = Board.checkSpace(row, col);
 
@@ -25,7 +25,7 @@ public class Knight extends Piece {
 				}
 			}
 		}
-		if(canMove) {
+		if(canMove && saveMove) {
 			space = Board.spaceDeConverter(row, col);
 		}
 		return canMove;

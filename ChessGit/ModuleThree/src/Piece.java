@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public abstract class Piece {
 	private String color;
@@ -5,6 +6,7 @@ public abstract class Piece {
 	private String shortName;
 	protected String shortColor;
 	protected String space;
+	public ArrayList<String> availableMoves = new ArrayList<>();
 	public Piece() {
 		this.pieceName = ("Default");
 		this.color = "Default";
@@ -20,7 +22,7 @@ public abstract class Piece {
 		this.setShortColor(shortColor);
 		this.space = space;
 	}
-	public abstract boolean chekMove(int row, int col);
+	public abstract boolean chekMove(int row, int col, boolean saveMove);
 
 	public String getShortName() {
 		return shortName;
@@ -42,7 +44,7 @@ public abstract class Piece {
 		return space;
 	}
 	
-	public void setSpace(String space) {
+	public void setSpace() {
 		this.space = space;
 	}
 }

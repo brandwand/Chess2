@@ -1,35 +1,52 @@
-import java.io.FileInputStream;
-import java.io.InputStream;
+import java.util.Scanner;
 
 public class Game {
+	private boolean turn = true; // true = white; false = black;
+	private boolean done = false;
+	private String input;
+	private Scanner scan = new Scanner(System.in);
 
-	public static void main(String[] args) {
-		InputStream in = null;
-		FileIO file = null;
-		Board board = new Board();
-		try {
-
-			if(args.length == 0) {
-				in = new FileInputStream("PlaceTests.txt");
+	public void play() {
+		while(!done) {
+			if(turn) {
+				whiteTurn();
 			} else {
-				in = new FileInputStream(args[0]);
-				file = new FileIO(in);
-			}		
-		} catch(Exception e) {
-		}	
-		file.comparingLines();
-
-		board.placement(file.placeArrayList());
-		board.movement(file.moveArrayList());
-		String[][] boardArray = board.printBoard();
-		while(!board.movement(file.moveArrayList()).isEmpty()) {
-			for (int i = boardArray.length - 1; i > 0; i--) {
-				for (int t = 0; t < boardArray.length; t++) {
-					System.out.print(boardArray[i][t].toString());
-				}
-				System.out.println();
+				blackTurn();
 			}
-			System.out.println("  A   B   C   D   E   F   G   H");
+		}
+	}
+
+	public void whiteTurn() {
+		boolean didMove = false;
+		while (!didMove) {
+			System.out.println("White Turn");
+			input = scan.nextLine();
+			String pieceName = "|" + input.toUpperCase().trim() + "|";
+			Starter.file.setLine(input);
+			Starter.file.movement();
+			Board.movement(Starter.file.movement());
+			didMove = true;
+			turn = false;
+		}	
+	}
+
+	public void blackTurn() {
+		boolean didMove = false;
+		while (!didMove) {
+			System.out.println("Black Turn");
+			input = scan.nextLine();
+			//			if(Board.setPiece)
+			//			if(pieceName.contains("Q") || pieceName.contains("K") || pieceName.contains("N") || pieceName.contains("B") || pieceName.contains("R") || pieceName.contains("P")) {
+			//				if(pieceName.endsWith("D")) {
+			//					if(pieceName.length() == 2) {
+			Starter.file.setLine(input);
+			Starter.file.movement();
+			Board.movement(Starter.file.movement());
+			didMove = true;
+			turn = true;
+			//					}
+			//				}
+			//		}
 		}
 	}
 }

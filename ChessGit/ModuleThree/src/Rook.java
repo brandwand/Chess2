@@ -6,7 +6,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	public boolean chekMove(int row, int col) {
+	public boolean chekMove(int row, int col, boolean saveMove) {
 		int[] rowCol = Board.spaceConverter(space);
 		boolean canMove = false;
 
@@ -103,7 +103,7 @@ public class Rook extends Piece {
 				} 
 			}
 		}
-		if(canMove) {
+		if(canMove && saveMove) {
 			space = Board.spaceDeConverter(row, col);
 		}
 		return canMove;

@@ -22,7 +22,7 @@ public class FileIO {
 	public FileIO(InputStream fileName) {
 		moveArrayList = new ArrayList<String>();
 		placeArrayList = new ArrayList<String>();
-		
+
 		board = new Board();
 		placeCounter = 0;
 		moveCounter = 0;
@@ -34,11 +34,15 @@ public class FileIO {
 			e.printStackTrace();
 		}
 	}
+	
+	public void setLine(String line) {
+		this.line = line;
+	}
 
 	public ArrayList<String> moveArrayList() {
 		return moveArrayList;
 	}
-	
+
 	public ArrayList<String> placeArrayList() {
 		return placeArrayList;
 	}
@@ -66,11 +70,6 @@ public class FileIO {
 					movement();
 				}
 			}
-			System.out.println("Number of placements " + placeCounter);
-			System.out.println("Number of moves " + moveCounter);
-			System.out.println("Castling King Side: " + kingSideCounter);
-			System.out.println("Castling Queen Side: " + queenSideCounter);
-//			board.printBoard();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -210,7 +209,6 @@ public class FileIO {
 		} else {
 			System.out.println(line + " Not a match");
 		}		
-		System.out.println(moveArrayList);
 		return moveArrayList;
 	}
 }
