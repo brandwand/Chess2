@@ -22,7 +22,7 @@ public abstract class Piece {
 		this.setShortColor(shortColor);
 		this.space = space;
 	}
-	public abstract boolean chekMove(int row, int col, boolean saveMove);
+	public abstract boolean checkMove(int row, int col, boolean saveMove);
 
 	public String getShortName() {
 		return shortName;

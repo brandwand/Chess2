@@ -34,7 +34,7 @@ public class FileIO {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void setLine(String line) {
 		this.line = line;
 	}
@@ -188,22 +188,11 @@ public class FileIO {
 			String secondLocationMovingTo = match.group(5);
 			String captured = match.group(6);
 			int secondMove = 6;
-			if(line.length() == secondMove) {
-				System.out.println(line + " Moved from " + position + " to " + locationMovingTo + " and captured a piece.");
-				moveArrayList.add(position + " " + locationMovingTo + " " + captured);
-			} else if(line.length() < secondMove) {
-				System.out.println(line + " Moved from " + position + " to " + locationMovingTo);
+			if(line.length() < secondMove) {
 				moveArrayList.add(position + " " + locationMovingTo);
-
-			} else if(!captured.isEmpty()){
-				moveArrayList.add(secondPosition + " " + secondLocationMovingTo + " " + captured);
-				System.out.println(line.substring(6, 12) + " Moved from " + secondPosition + " to " + secondLocationMovingTo + " and captured a piece.");
-
 			} else {
 				moveArrayList.add(position + " " + locationMovingTo);
 				moveArrayList.add(secondPosition + " " + secondLocationMovingTo);
-				System.out.println(line.substring(0,5) + " Moved from " + position + " to " + locationMovingTo);
-				System.out.println(line.substring(6, 11) + " Moved from " + secondPosition + " to " + secondLocationMovingTo);
 			}
 			moveCounter++;
 		} else {

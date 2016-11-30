@@ -87,7 +87,6 @@ public class Board {
 	}
 
 	public void constructBoard() {
-
 		int counting = -1;
 		for (int rows = 0; rows < array.length; rows++) {
 			counting++;
@@ -311,7 +310,7 @@ public class Board {
 			grabPiece(checkSpace(rows, cols), placeSplitUp[2]);
 		}
 	}
-	
+
 	public static void printingBoard() {
 		String[][] boardArray = printBoard();
 		for (int i = boardArray.length - 1; i > 0; i--) {
@@ -321,9 +320,10 @@ public class Board {
 			System.out.println();
 		}
 		System.out.println("  A   B   C   D   E   F   G   H");
-}
+	}
 
-	public static void movement(ArrayList<String> move) {
+	public static boolean movement(ArrayList<String> move) {
+		boolean moved = false;
 		for (int t = 0; t < move.size(); t++) {		
 			String moveToString = move.get(t).toString();
 			String[] moveSplitUp = moveToString.split(" ");
@@ -333,13 +333,16 @@ public class Board {
 			findingBoardSpot(moveSplitUp[1]);	
 			grabPiece(checkSpace(startrow, startcol), moveSplitUp[0]);
 			if(setPiece != null) {
-				if(setPiece.chekMove(rows, cols, true)) {	
-					updateBoard(setPiece.getShortName(), setPiece.getShortColor(), rows, cols);
+				moved = setPiece.checkMove(rows, cols, true);
+				if(moved) {	
+					updateBoard(setPiece.getShortName(), setPiece.getShortColor(), rows, cols);	
 					updateBoard(empty, "", startrow, startcol);	
-					setPiece = null;
 					printingBoard();
+					System.out.println(moveSplitUp[0] + " " + moveSplitUp[1] + " move from " +  moveSplitUp[0] + " to " + moveSplitUp[1] );
 				} 			
-			}			
+			}		
+			setPiece = null;
 		}
+		return moved;
 	}
 }

@@ -7,7 +7,7 @@ public class Bishop extends Piece {
 	}
 
 	@Override
-	public boolean chekMove(int row, int col, boolean saveMove) {
+	public boolean checkMove(int row, int col, boolean saveMove) {
 		int[] rowCol = Board.spaceConverter(getSpace());
 		boolean canMove = false;
 

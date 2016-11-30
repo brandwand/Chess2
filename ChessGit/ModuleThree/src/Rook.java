@@ -6,7 +6,7 @@ public class Rook extends Piece {
 	}
 
 	@Override
-	public boolean chekMove(int row, int col, boolean saveMove) {
+	public boolean checkMove(int row, int col, boolean saveMove) {
 		int[] rowCol = Board.spaceConverter(space);
 		boolean canMove = false;
 

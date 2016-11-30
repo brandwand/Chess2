@@ -6,7 +6,7 @@ public class King extends Piece {
 	}
 
 	@Override
-	public boolean chekMove(int row, int col, boolean saveMove) {
+	public boolean checkMove(int row, int col, boolean saveMove) {
 		boolean canMove = false;
 		int[] rowCol = Board.spaceConverter(getSpace());
 		String check = Board.checkSpace(row, col);
