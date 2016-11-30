@@ -323,6 +323,7 @@ public class Board {
 	}
 
 	public static boolean movement(ArrayList<String> move) {
+
 		boolean moved = false;
 		for (int t = 0; t < move.size(); t++) {		
 			String moveToString = move.get(t).toString();
@@ -338,6 +339,12 @@ public class Board {
 					updateBoard(setPiece.getShortName(), setPiece.getShortColor(), rows, cols);	
 					updateBoard(empty, "", startrow, startcol);	
 					printingBoard();
+					if(kingL.Check(Board.spaceDeConverter(startrow, startcol))) {
+						System.out.println("Light king in check");
+					}
+					if(kingD.Check(Board.spaceDeConverter(startrow, startcol))) {
+						System.out.println("Dark king in check");
+					}
 					System.out.println(moveSplitUp[0] + " " + moveSplitUp[1] + " move from " +  moveSplitUp[0] + " to " + moveSplitUp[1] );
 				} 			
 			}		
@@ -345,4 +352,5 @@ public class Board {
 		}
 		return moved;
 	}
+
 }

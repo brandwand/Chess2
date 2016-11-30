@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class FileIO {
+	public boolean matched;
 	private BufferedReader read;
 	private String line;
 	private int placeCounter;
@@ -179,7 +180,7 @@ public class FileIO {
 		String movePattern = "([a-h][1-8]) ([a-h][1-8])([\\*]?) ?([a-h]?[1-8]?) ?([a-h]?[1-8]?)([\\*]?)";
 		Pattern pattern = Pattern.compile(movePattern);
 		Matcher match = pattern.matcher(line);
-		boolean matched = match.matches();
+		matched = match.matches();
 
 		if(matched) {
 			position = match.group(1);

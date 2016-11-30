@@ -1,5 +1,6 @@
 public class King extends Piece {
-	public boolean isInCheck = false;
+	private boolean isInCheck = false;
+	private boolean checkMate = false;
 	public King(String pieceName, String color, String shortName, String shortColor, String space) {
 		super(pieceName, color, shortName, shortColor, space);
 		// TODO Auto-generated constructor stub
@@ -24,59 +25,53 @@ public class King extends Piece {
 	}
 
 
-	public void Check(String space)
-	{
+	public boolean Check(String space) {
 		boolean horCheck = false;
 		boolean verCheck = false;
 		boolean diaCheck = false;
 		boolean lCheck = false;
 
 		System.out.println((shortColor + " Is King in Check?"));
-		if(checkHorRight(space) || checkHorLeft(space))
-		{
+		if(checkHorRight(space) || checkHorLeft(space)) {
 			horCheck = true;
 		}
-		else
-		{
+		else {
 			horCheck = false;
 		}
-		if(checkVerUp(space) || checkVerDown(space))
-		{
+		if(checkVerUp(space) || checkVerDown(space)) {
 			verCheck = true;
 		}
-		else
-		{
+		else {
 			verCheck = false;
 		}
 
-		if(checkDiUpRight(space) || checkDiUpLeft(space) || checkDiDownLeft(space) || checkDiDownRight(space))
-		{
+		if(checkDiUpRight(space) || checkDiUpLeft(space) || checkDiDownLeft(space) || checkDiDownRight(space)) {
 			diaCheck = true;
 		}
-		else
-		{
+		else {
 			diaCheck = false;
 		}
 
-		if(checkLupLeft(space) || checkLUpRight(space) || checkLDownLeft(space) || checkLDownRight(space))
-		{
+		if(checkLupLeft(space) || checkLUpRight(space) || checkLDownLeft(space) || checkLDownRight(space)) {
 			lCheck = true;
 		}
-		else
-		{
+		else {
 			lCheck = false;
 		}
 
 
-		if(horCheck || verCheck || diaCheck  || lCheck)
-		{
+		if(horCheck || verCheck || diaCheck  || lCheck) {
 			isInCheck = true;
-		}
-		else
-		{
+			}
+		else {
 			isInCheck = false;
 		}
-
+		
+		if(horCheck && verCheck && diaCheck && lCheck) {
+			checkMate = true;
+		}
+		
+		return isInCheck;
 
 
 	}
