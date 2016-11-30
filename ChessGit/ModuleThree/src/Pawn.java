@@ -21,8 +21,10 @@ public class Pawn extends Piece {
 			}
 			if(rowCol[0] - 1 == row && rowCol[1] + 1 == col && !check.equals(Board.empty) && !String.valueOf(check.charAt(2)).equals(shortColor)) {
 				canMove = true;
+				isFirst = false;
 			} else if(rowCol[0] - 1 == row && rowCol[1] - 1 == col && !check.equals(Board.empty) && !String.valueOf(check.charAt(2)).equals(shortColor)) {
 				canMove = true;
+				isFirst = false;
 			}
 			if(rowCol[0] - row == 1 && col == rowCol[1]) {
 				if(check.equals(Board.empty)) {
@@ -41,8 +43,10 @@ public class Pawn extends Piece {
 			}
 			if(rowCol[0] + 1 == row && rowCol[1] - 1 == col && !check.equals(Board.empty) && !String.valueOf(check.charAt(2)).equals(shortColor)) {
 				canMove = true;
+				isFirst = false;
 			} else if(rowCol[0] + 1 == row && rowCol[1] + 1 == col && !check.equals(Board.empty) && !String.valueOf(check.charAt(2)).equals(shortColor)) {
 				canMove = true;
+				isFirst = false;
 			}
 			if(row - rowCol[0] == 1 && col == rowCol[1]) {
 				System.out.println(isFirst);
