@@ -19,6 +19,7 @@ public class Bishop extends Piece {
 							String check = Board.checkSpace(i, j);
 							if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)) {
 								canMove = true;
+								//								System.out.println("Hi");
 							} else {
 								canMove = false;
 								break;
@@ -33,6 +34,7 @@ public class Bishop extends Piece {
 							String check = Board.checkSpace(i, j);
 							if(!String.valueOf(check.charAt(2)).equals(shortColor)) {
 								canMove = true;
+								//								System.out.println("YO");
 							} else {
 								canMove = false;
 								break;
@@ -52,6 +54,7 @@ public class Bishop extends Piece {
 							String check = Board.checkSpace(i, j);
 							if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)) {
 								canMove = true;
+								//								System.out.println("bOI");
 							} else {
 								canMove = false;
 								break;
@@ -66,6 +69,7 @@ public class Bishop extends Piece {
 							String check = Board.checkSpace(i, j);
 							if(!String.valueOf(check.charAt(2)).equals(shortColor)) {
 								canMove = true;
+								//								System.out.println("HOME");
 							} else {
 								canMove = false;
 								break;
@@ -75,8 +79,8 @@ public class Bishop extends Piece {
 				}
 			}
 		}
-		
-		
+
+
 		if(row - rowCol[0] == rowCol[1] - col) {
 			if(rowCol[0] + 1 != row && rowCol[1] - 1 != col) {
 				for(int i = row - 1; i > rowCol[0]; i--) {
@@ -85,6 +89,7 @@ public class Bishop extends Piece {
 							String check = Board.checkSpace(i, j);
 							if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)) {
 								canMove = true;
+								//								System.out.println("NOT HOME");
 							} else {
 								canMove = false;
 								break;
@@ -99,6 +104,7 @@ public class Bishop extends Piece {
 							String check = Board.checkSpace(i, j);
 							if(!String.valueOf(check.charAt(2)).equals(shortColor)) {
 								canMove = true;
+								//								System.out.println("OKAY");
 							} else {
 								canMove = false;
 								break;
@@ -119,6 +125,7 @@ public class Bishop extends Piece {
 
 							if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)) {
 								canMove = true;
+								//								System.out.println("Last");
 							} else {
 								canMove = false;
 								break;
@@ -133,6 +140,7 @@ public class Bishop extends Piece {
 							String check = Board.checkSpace(i, j);
 							if(!String.valueOf(check.charAt(2)).equals(shortColor)) {
 								canMove = true;
+								//								System.out.println("REal last");
 							} else {
 								canMove = false;
 								break;

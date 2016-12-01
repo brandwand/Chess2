@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
 public class Board {
-	private static King kingL;
-	private static King kingD; 
+	static King kingL;
+	static King kingD; 
 	private static Queen queenL; 
 	private static Queen queenD;
 	private static Rook rookL1;
@@ -323,9 +323,8 @@ public class Board {
 	}
 
 	public static boolean movement(ArrayList<String> move) {
-
 		boolean moved = false;
-		for (int t = 0; t < move.size(); t++) {		
+		for (int t = 0; t < move.size(); t++) {
 			String moveToString = move.get(t).toString();
 			String[] moveSplitUp = moveToString.split(" ");
 			findingBoardSpot(moveSplitUp[0]);
@@ -333,23 +332,36 @@ public class Board {
 			int startcol = cols;
 			findingBoardSpot(moveSplitUp[1]);	
 			grabPiece(checkSpace(startrow, startcol), moveSplitUp[0]);
+
 			if(setPiece != null) {
 				moved = setPiece.checkMove(rows, cols, true);
 				if(moved) {	
 					updateBoard(setPiece.getShortName(), setPiece.getShortColor(), rows, cols);	
 					updateBoard(empty, "", startrow, startcol);	
-					printingBoard();
-					if(kingL.Check(Board.spaceDeConverter(startrow, startcol))) {
-						System.out.println("Light king in check");
-					}
-					if(kingD.Check(Board.spaceDeConverter(startrow, startcol))) {
-						System.out.println("Dark king in check");
-					}
 					System.out.println(moveSplitUp[0] + " " + moveSplitUp[1] + " move from " +  moveSplitUp[0] + " to " + moveSplitUp[1] );
-				} 			
+					//					} else {	
+					if(setPiece.shortColor.equals("D")) {
+						if(kingD.Check(kingD.space)) {
+
+							
+						}	
+					} 
+					if(setPiece.shortColor.equals("L")) {
+						if(kingL.Check(kingL.space)) {
+							updateBoard(empty, "", rows, cols);	
+							updateBoard(setPiece.getShortName(), setPiece.getShortColor(), startrow, startcol);	
+							setPiece.checkMove(rows, cols, true);
+						}
+						
+					}
+					printingBoard();
+
+				}
 			}		
-			setPiece = null;
-		}
+
+		}		
+		setPiece = null;
+		move.clear();
 		return moved;
 	}
 

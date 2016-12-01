@@ -8,6 +8,20 @@ public class Game {
 
 	public void play() {
 		while(!done) {
+			if(Board.kingL.Check(Board.kingL.getSpace())) {
+				System.out.println("Light king in check");
+				//								updateBoard(empty, "", startrow, startcol);	
+				//								updateBoard(setPiece.getShortName(),setPiece.getShortColor(),rows, cols);	
+			} else {
+				System.out.println("Nope");
+			}
+			if(Board.kingD.Check(Board.kingD.getSpace())) {
+				System.out.println("Dark king in check");
+				//								updateBoard(empty, "", startrow, startcol);	
+				//								updateBoard(setPiece.getShortName(),setPiece.getShortColor(),rows, cols);	
+			} else {
+				System.out.println("Nope");
+			}		
 			if(turn) {
 				whiteTurn();
 			} else {
@@ -19,6 +33,7 @@ public class Game {
 	public void whiteTurn() {
 		boolean didMove = false;
 		while (!didMove) {			
+
 			System.out.println("White Turn");
 			input = scan.nextLine();	
 			String[] inputSplit = input.split(" ");
@@ -34,18 +49,21 @@ public class Game {
 					if(Board.setPiece.shortColor.equals("L")) {	
 
 						if(Board.movement(Starter.file.moveArrayList())) {
-							didMove = true;	
-							turn = false;
+							if(!Board.kingL.Check(Board.kingL.space)) {
+								didMove = true;	
+								turn = false;
+							}
 						}
+						
 					} else {
 						System.out.println("Invalid move");
 					}
-					//								Starter.file.moveArrayList().clear();
-//					Board.printingBoard();
+					//					Board.printingBoard();
 				} else {
 					System.out.println("Try again");
 				}
 
+				Starter.file.moveArrayList().clear();
 
 			}
 		}
@@ -67,13 +85,14 @@ public class Game {
 				Board.grabPiece(Board.checkSpace(startRow,startCol), inputSplit[0]);
 				if(Board.setPiece != null) {
 					if(Board.setPiece.shortColor.equals("D")) {
+								didMove = true;
 
 						if(Board.movement(Starter.file.moveArrayList())) {
-							didMove = true;
-							turn = true;
+							if(!Board.kingD.Check(Board.kingD.space)) {
+								turn = true;
+							}
 						}
 					} else {
-						//					Starter.file.moveArrayList().clear();
 						System.out.println("Invalid move");
 					}
 					//								Board.printingBoard();
@@ -81,6 +100,8 @@ public class Game {
 					System.out.println("Try Again");
 				}
 			}
-		}
+			Starter.file.moveArrayList().clear();
+		}											
+
 	}
 }	

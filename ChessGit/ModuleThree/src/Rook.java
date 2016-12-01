@@ -17,6 +17,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(rowCol[0], i);
 						if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)){
 							canMove = true;
+//							System.out.println("Hello");
 						} else {
 							canMove = false;
 							break;
@@ -27,6 +28,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(rowCol[0], i);
 						if(!String.valueOf(check.charAt(2)).equals(shortColor)){
 							canMove = true;
+//							System.out.println("Hi");
 						} else {
 							canMove = false;
 							break;
@@ -39,6 +41,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(rowCol[0], i);
 						if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)) {
 							canMove = true;
+//							System.out.println("YO");
 						} else {
 							canMove = false;
 							break;
@@ -49,6 +52,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(rowCol[0], i);
 						if(!String.valueOf(check.charAt(2)).equals(shortColor)) {
 							canMove = true;
+//							System.out.println("SUP");
 						} else {
 							canMove = false;
 							break;
@@ -63,6 +67,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(i, rowCol[1]);
 						if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)) {
 							canMove = true;
+//							System.out.println("YOYO");
 						} else {
 							canMove = false;
 							break;
@@ -73,6 +78,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(i, rowCol[1]);
 						if(!String.valueOf(check.charAt(2)).equals(shortColor)) {
 							canMove = true;
+//							System.out.println("NEY");
 						} else {
 							canMove = false;
 							break;
@@ -85,6 +91,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(i, rowCol[1]);
 						if(check.equals(Board.empty) && !Board.checkSpace(row, col).contains(shortColor)) {
 							canMove = true;
+//							System.out.println("SUCKS");
 						} else { 
 							canMove = false;
 							break;
@@ -95,6 +102,7 @@ public class Rook extends Piece {
 						String check = Board.checkSpace(i, rowCol[1]);
 						if(!String.valueOf(check.charAt(2)).equals(shortColor)) {
 							canMove = true;
+//							System.out.println("OKAY");
 						} else { 
 							canMove = false;
 							break;

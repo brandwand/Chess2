@@ -14,10 +14,13 @@ public class King extends Piece {
 		if(rowCol[0] - row == 1 || rowCol[0] - row == 0 || rowCol[0] - row == -1) {
 			if(rowCol[1] - col == 1 || rowCol[1] - col == 0 || rowCol[1] - col == -1) {
 				if(check.equals(Board.empty) || !String.valueOf(check.charAt(2)).equals(shortColor)) {
-					canMove = true;
+					System.out.println((shortColor + " Is King in Check?"));
+					if(!Check(Board.spaceDeConverter(row,col))) {
+						canMove = true;
+					}
 				}
 			}
-		}
+		} 
 		if(canMove && saveMove) {
 			space = Board.spaceDeConverter(row, col);
 		}
@@ -31,7 +34,6 @@ public class King extends Piece {
 		boolean diaCheck = false;
 		boolean lCheck = false;
 
-		System.out.println((shortColor + " Is King in Check?"));
 		if(checkHorRight(space) || checkHorLeft(space)) {
 			horCheck = true;
 		}
@@ -62,15 +64,15 @@ public class King extends Piece {
 
 		if(horCheck || verCheck || diaCheck  || lCheck) {
 			isInCheck = true;
-			}
+		}
 		else {
 			isInCheck = false;
 		}
-		
+
 		if(horCheck && verCheck && diaCheck && lCheck) {
 			checkMate = true;
 		}
-		
+
 		return isInCheck;
 
 
@@ -108,7 +110,7 @@ public class King extends Piece {
 		//Horiztonal -Left
 		for (int i = rowCol[1] - 1; i >= 1; i--) {
 			check = Board.checkSpace(rowCol[0], i);
-			if (String.valueOf(check.charAt(2)).equals(shortColor))			{
+			if (String.valueOf(check.charAt(2)).equals(shortColor))	{
 
 				isLeft = false;
 				break;
@@ -135,12 +137,10 @@ public class King extends Piece {
 		//Vertical - UP
 		for (int i = rowCol[0] - 1; i > 1; i--) {
 			check = Board.checkSpace(i, rowCol[1]);
-
 			if (String.valueOf(check.charAt(2)).equals(shortColor)) {
 				isUp = false;
 				break;
 			}
-
 			if (!String.valueOf(check.charAt(2)).equals(shortColor)) {
 				if (String.valueOf(check.charAt(1)).equals("Q") || String.valueOf(check.charAt(1)).equals("R")) {
 					isUp = true;

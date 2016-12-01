@@ -16,6 +16,7 @@ public class Queen extends Piece {
 				for(int i = row + 1; i < rowCol[0]; i++) {
 					for(int j = col + 1; j < rowCol[1]; j++) {
 						if(rowCol[0] - i == rowCol[1] - j) {
+							System.out.println("Hello");
 							String check = Board.checkSpace(i, j);
 							if(check.equals(Board.empty) && !Board.checkSpace(row, col).equals(shortColor)) {
 								canMove = true;
@@ -112,8 +113,8 @@ public class Queen extends Piece {
 
 		if(row - rowCol[0]  == col - rowCol[1]) {
 			if(rowCol[0] - 1 != row && rowCol[1] - 1 != col) {
-				for(int i = row - 1; i > rowCol[0]; i--) {
-					for(int j = col - 1; j > rowCol[1]; j--) {
+				for(int i = row; i > rowCol[0]; i--) {
+					for(int j = col; j > rowCol[1]; j--) {
 						if(i - rowCol[0] == j - rowCol[1]) {
 							String check = Board.checkSpace(i, j);
 							if(check.equals(Board.empty) && !Board.checkSpace(row, col).equals(shortColor)) {
