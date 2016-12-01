@@ -341,16 +341,17 @@ public class Board {
 					System.out.println(moveSplitUp[0] + " " + moveSplitUp[1] + " move from " +  moveSplitUp[0] + " to " + moveSplitUp[1] );
 					//					} else {	
 					if(setPiece.shortColor.equals("D")) {
-						if(kingD.Check(kingD.space)) {
-
-							
+						if(kingD.check(kingD.space)) {
+							updateBoard(empty, "", rows, cols);	
+							updateBoard(setPiece.getShortName(), setPiece.getShortColor(), startrow, startcol);	
+//							setPiece.checkMove(rows, cols, true);
 						}	
 					} 
 					if(setPiece.shortColor.equals("L")) {
-						if(kingL.Check(kingL.space)) {
+						if(kingL.check(kingL.space)) {
 							updateBoard(empty, "", rows, cols);	
 							updateBoard(setPiece.getShortName(), setPiece.getShortColor(), startrow, startcol);	
-							setPiece.checkMove(rows, cols, true);
+//							setPiece.checkMove(rows, cols, true);
 						}
 						
 					}

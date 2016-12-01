@@ -15,7 +15,7 @@ public class King extends Piece {
 			if(rowCol[1] - col == 1 || rowCol[1] - col == 0 || rowCol[1] - col == -1) {
 				if(check.equals(Board.empty) || !String.valueOf(check.charAt(2)).equals(shortColor)) {
 					System.out.println((shortColor + " Is King in Check?"));
-					if(!Check(Board.spaceDeConverter(row,col))) {
+					if(!check(Board.spaceDeConverter(row,col))) {
 						canMove = true;
 					}
 				}
@@ -28,7 +28,7 @@ public class King extends Piece {
 	}
 
 
-	public boolean Check(String space) {
+	public boolean check(String space) {
 		boolean horCheck = false;
 		boolean verCheck = false;
 		boolean diaCheck = false;
@@ -216,6 +216,7 @@ public class King extends Piece {
 		boolean isUpRight = false;
 
 		////Diagnol - UP -Right
+		outerloop:
 		for (int i = rowCol[0] - 1; i > 1; i--) {
 			for (int j = rowCol[1] + 1; j < 9; j++) {
 				check = Board.checkSpace(i, j);
@@ -223,17 +224,17 @@ public class King extends Piece {
 				if (rowCol[0] - i == j - rowCol[1]) {
 					if (String.valueOf(check.charAt(2)).equals(shortColor)) {
 						isUpRight = false;
-						break;
+						break outerloop;
 					}
 					if (!String.valueOf(check.charAt(2)).equals(shortColor)) {
 						if (String.valueOf(check.charAt(1)).equals("Q") || String.valueOf(check.charAt(1)).equals("B")) {
 							isUpRight = true;
-							break;
+							break outerloop;
 						}
 						if (i == rowCol[0] - 1 && j == rowCol[1] + 1) {
 							if (String.valueOf(check.charAt(1)).equals("P")) {
 								isUpRight = true;
-								break;
+								break outerloop;
 							}
 						}
 					}

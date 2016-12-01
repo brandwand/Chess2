@@ -8,14 +8,14 @@ public class Game {
 
 	public void play() {
 		while(!done) {
-			if(Board.kingL.Check(Board.kingL.getSpace())) {
+			if(Board.kingL.check(Board.kingL.getSpace())) {
 				System.out.println("Light king in check");
 				//								updateBoard(empty, "", startrow, startcol);	
 				//								updateBoard(setPiece.getShortName(),setPiece.getShortColor(),rows, cols);	
 			} else {
 				System.out.println("Nope");
 			}
-			if(Board.kingD.Check(Board.kingD.getSpace())) {
+			if(Board.kingD.check(Board.kingD.getSpace())) {
 				System.out.println("Dark king in check");
 				//								updateBoard(empty, "", startrow, startcol);	
 				//								updateBoard(setPiece.getShortName(),setPiece.getShortColor(),rows, cols);	
@@ -49,12 +49,12 @@ public class Game {
 					if(Board.setPiece.shortColor.equals("L")) {	
 
 						if(Board.movement(Starter.file.moveArrayList())) {
-							if(!Board.kingL.Check(Board.kingL.space)) {
+							if(!Board.kingL.check(Board.kingL.space)) {
 								didMove = true;	
 								turn = false;
 							}
 						}
-						
+
 					} else {
 						System.out.println("Invalid move");
 					}
@@ -85,11 +85,11 @@ public class Game {
 				Board.grabPiece(Board.checkSpace(startRow,startCol), inputSplit[0]);
 				if(Board.setPiece != null) {
 					if(Board.setPiece.shortColor.equals("D")) {
+						if(Board.movement(Starter.file.moveArrayList())) {
+							if(!Board.kingD.check(Board.kingD.space)) {
+								turn = true;								
 								didMove = true;
 
-						if(Board.movement(Starter.file.moveArrayList())) {
-							if(!Board.kingD.Check(Board.kingD.space)) {
-								turn = true;
 							}
 						}
 					} else {
